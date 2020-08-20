@@ -3,6 +3,7 @@ const Big = require('big.js');
 const operate = (numberOne, numberTwo, operation) => {
   const num1 = new Big(numberOne);
   const num2 = new Big(numberTwo);
+  const negativeOne = new Big(-1);
   let result;
 
   switch (operation) {
@@ -20,6 +21,9 @@ const operate = (numberOne, numberTwo, operation) => {
       break;
     case '%':
       result = num1.mod(num2);
+      break;
+    case '+/-':
+      result = num1.times(negativeOne);
       break;
     default:
       break;
