@@ -4,7 +4,7 @@ import ButtonPanel from './ButtonPanel';
 
 export default function App() {
   return (
-    <div id='app'>
+    <div id="app">
       <Display />
       <ButtonPanel />
     </div>
