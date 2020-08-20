@@ -1,12 +1,13 @@
 $gray: #858693
 $hover: #c2c2c2
+$hover_orange: #cf8a28
 
 #root
   *
     box-sizing: border-box
     font-size: 1.2em
   #app
-    margin: 0 auto
+    margin: 5% auto
     display: flex
     flex-direction: column
     width: 700px
@@ -15,13 +16,15 @@ $hover: #c2c2c2
     display: flex
     background-color: $gray
     font-weight: bolder
-    padding: 5px
+    padding-right: 25px
     color: white
     height: 100px
     width: 100%
     justify-content: flex-end
     align-items: center
+    border-radius: 3px
   .button-panel
+    margin-top: 5px
     width: 100%
     display: flex
     flex-wrap: wrap
@@ -48,8 +51,6 @@ $hover: #c2c2c2
           border-bottom-right-radius: 0
         &:hover
           background-color: $hover
-      .zero
-        width: 50%
       &:first-child
         button
           border-top-left-radius: 0
