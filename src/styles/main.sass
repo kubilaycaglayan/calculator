@@ -1,11 +1,19 @@
+$gray: #858693
+$hover: #c2c2c2
+
 #root
+  *
+    box-sizing: border-box
+    font-size: 1.2em
   #app
+    margin: 0 auto
     display: flex
     flex-direction: column
     width: 700px
   .display
+    font-size: 2em
     display: flex
-    background-color: #858693
+    background-color: $gray
     font-weight: bolder
     padding: 5px
     color: white
@@ -14,8 +22,39 @@
     justify-content: flex-end
     align-items: center
   .button-panel
+    width: 100%
     display: flex
     flex-wrap: wrap
     > div
       height: 100px
       width: 100%
+      button
+        color: black
+        width: 25%
+        height: 100%
+        border: 4px white solid
+        border-top-left-radius: 20px
+        border-top-right-radius: 20px
+        border-bottom-left-radius: 20px
+        border-bottom-right-radius: 20px
+        outline: none
+        &:first-child
+          border-left: none
+          border-top-left-radius: 0
+          border-bottom-left-radius: 0
+        &:last-child
+          border-right: none
+          border-top-right-radius: 0
+          border-bottom-right-radius: 0
+        &:hover
+          background-color: $hover
+      .zero
+        width: 50%
+      &:first-child
+        button
+          border-top-left-radius: 0
+          border-top-right-radius: 0
+      &:last-child
+        button
+          border-bottom-left-radius: 0
+          border-bottom-right-radius: 0
