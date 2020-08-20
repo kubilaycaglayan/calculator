@@ -3,7 +3,7 @@ import Button from './Button';
 
 export default function ButtonPanel() {
   return (
-    <div>
+    <div className="button-panel">
       <div>
         <Button name="AC" />
         <Button name="+/-" />
