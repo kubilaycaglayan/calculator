@@ -15,6 +15,7 @@ class App extends React.Component {
     };
     this.numbers = [...new Array(10).keys()];
     this.operations = ['-', '+', 'X', '+/-', '%', '÷', '='];
+    window.addEventListener('keydown', this.handleButtons.bind(this));
   }
 
   handleClearInput() {
@@ -28,7 +29,6 @@ class App extends React.Component {
   clearDisplay() {
     const { clear, next } = this.state;
     if (clear) {
-      console.log('clearing')
       this.setState({
         next: null,
         clear: false,
@@ -118,9 +118,30 @@ class App extends React.Component {
     } else if (buttonName === 'AC') {
       this.handleClearInput();
     }
-    setTimeout(() => {
-      console.log(this.state);
-    }, 200);
+  }
+
+  handleButtons(event) {
+    let buttonName = event.key;
+    switch (buttonName) {
+      case 'Enter':
+        buttonName = '=';
+        break;
+      case '/':
+        buttonName = '÷';
+        break;
+      case '*':
+        buttonName = 'X';
+        break;
+      case ',':
+        buttonName = '.';
+        break;
+      case 'Backspace':
+        buttonName = 'AC';
+        break;
+      default:
+        break;
+    }
+    this.handleClick(buttonName);
   }
 
   render() {
