@@ -5,17 +5,8 @@ export default function Button(props) {
   const { color, wide, name } = props;
   const style = {};
 
-  (function isWide() {
-    if (wide) {
-      style.width = '50%';
-    }
-  }());
-
-  (function isOrange() {
-    if (!color) {
-      style.backgroundColor = 'orange';
-    }
-  }());
+  style.width = wide ? '50%' : '';
+  style.backgroundColor = (color === 'orange' ? 'orange' : '');
 
   return (
     <button style={style} type="button">
@@ -32,5 +23,5 @@ Button.propTypes = {
 
 Button.defaultProps = {
   wide: false,
-  color: false,
+  color: 'orange',
 };
