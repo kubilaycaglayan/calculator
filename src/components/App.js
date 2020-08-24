@@ -12,19 +12,41 @@ class App extends React.Component {
       next: null,
       operate: null,
     };
+    this.numbers = [...new Array(10).keys()];
+    this.operations = ['-', '+', 'X', '+/-', '%', '÷', '='];
+  }
+
+  handleClearInput() {
+    console.log('Clear');
+  }
+
+  handleNumberInput(buttonName) {
+    console.log(buttonName);
+  }
+
+  handleOperationInput(buttonName) {
+    console.log(buttonName);
   }
 
   handleClick(buttonName) {
-    const { total, next, operate } = this.state;
-    console.log('clicked ', total, next, operate, buttonName);
+    if (this.numbers.includes(parseInt(buttonName, 10)) || buttonName === '.') {
+      this.handleNumberInput(buttonName);
+    } else if (this.operations.includes(buttonName)) {
+      this.handleOperationInput(buttonName);
+    } else if (buttonName === 'AC') {
+      this.handleClearInput();
+    }
   }
 
   render() {
-    const { next } = this.state;
+    let { next } = this.state;
+    if (next === null) {
+      next = '0';
+    }
     return (
       <div id="app">
         <Display next={next} />
-        <ButtonPanel clickHandler={this.handleClick} />
+        <ButtonPanel clickHandler={this.handleClick.bind(this)} />
       </div>
     );
   }

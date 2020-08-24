@@ -5,6 +5,10 @@ export default function Button(props) {
   const { color, wide, name } = props;
   const style = {};
 
+  function handleClick(buttonName) {
+    return props.clickHandler(buttonName);
+  }
+
   (function isWide() {
     if (wide) {
       style.width = '50%';
@@ -18,7 +22,7 @@ export default function Button(props) {
   }());
 
   return (
-    <button style={style} type="button">
+    <button onClick={() => { handleClick(name); }} style={style} type="button">
       { name }
     </button>
   );
@@ -26,6 +30,7 @@ export default function Button(props) {
 
 Button.propTypes = {
   name: PropTypes.string.isRequired,
+  clickHandler: PropTypes.func.isRequired,
   wide: PropTypes.bool,
   color: PropTypes.bool,
 };
