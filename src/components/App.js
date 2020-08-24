@@ -18,10 +18,20 @@ class App extends React.Component {
 
   handleClearInput() {
     console.log('Clear');
+    this.setState({
+      total: null,
+      next: null,
+      operate: null,
+    })
   }
 
   handleNumberInput(buttonName) {
     console.log(buttonName);
+    const { next } = this.state;
+    const newNext = `${next}`.replace(/null/g, '').concat(buttonName);
+    this.setState({
+      next: newNext,
+    });
   }
 
   handleOperationInput(buttonName) {
