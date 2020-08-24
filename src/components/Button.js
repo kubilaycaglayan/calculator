@@ -1,24 +1,36 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Button(props) {
-  props = { color: false, wide: false, ...props };
-  props.style = {};
+  const { color, wide, name } = props;
+  const style = {};
 
   (function isWide() {
-    if (props.wide) {
-      props.style.width = "50%";
+    if (wide) {
+      style.width = '50%';
     }
-  })();
+  }());
 
   (function isOrange() {
-    if(!props.color) {
-      props.style.backgroundColor = "orange";
+    if (!color) {
+      style.backgroundColor = 'orange';
     }
-  })();
+  }());
 
   return (
-    <button style={props.style} className={props.className} type="button">
-      { props.name }
+    <button style={style} type="button">
+      { name }
     </button>
   );
 }
+
+Button.propTypes = {
+  name: PropTypes.string.isRequired,
+  wide: PropTypes.bool,
+  color: PropTypes.bool,
+};
+
+Button.defaultProps = {
+  wide: false,
+  color: false,
+};
