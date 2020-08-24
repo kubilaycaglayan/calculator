@@ -56,6 +56,7 @@ class App extends React.Component {
 
   convertToPercentage() {
     const { next } = this.state;
+    if (next === null) return;
     this.setState({
       next: (next / 100).toString(),
     });
@@ -63,6 +64,7 @@ class App extends React.Component {
 
   convertToOppositeSign({ total, next, operate }, buttonName) {
     const result = calculate({ total, next, operate }, buttonName);
+    if (next === null) return;
     this.setState({
       next: result.toPrecision(),
     });
