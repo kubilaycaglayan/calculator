@@ -17,7 +17,6 @@ class App extends React.Component {
   }
 
   handleClearInput() {
-    console.log('Clear');
     this.setState({
       total: null,
       next: null,
@@ -26,7 +25,6 @@ class App extends React.Component {
   }
 
   handleNumberInput(buttonName) {
-    console.log(buttonName);
     const { next } = this.state;
     const newNext = `${next}`.replace(/null/g, '').concat(buttonName);
     this.setState({
@@ -34,8 +32,29 @@ class App extends React.Component {
     });
   }
 
+  calculate({ total, next, operate }, buttonName) {
+    const result = calculate({ total, next, operate }, buttonName);
+    this.setState({
+      total: result.toPrecision(),
+      next: result.toPrecision(),
+    });
+  }
+
   handleOperationInput(buttonName) {
-    console.log(buttonName);
+    const { total, next, operate } = this.state;
+    if (buttonName === '=' && total !== null && next !== null) {
+      this.calculate({ total, next, operate }, operate);
+      return;
+    }
+    if (total === null) {
+      this.setState({
+        total: next,
+        next: null,
+        operate: buttonName,
+      });
+    } else {
+      this.calculate({ total, next, operate }, buttonName);
+    }
   }
 
   handleClick(buttonName) {
@@ -46,6 +65,9 @@ class App extends React.Component {
     } else if (buttonName === 'AC') {
       this.handleClearInput();
     }
+    setTimeout(() => {
+      console.log(this.state);
+    }, 0);
   }
 
   render() {
