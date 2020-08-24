@@ -11,6 +11,7 @@ class App extends React.Component {
       total: null,
       next: null,
       operate: null,
+      clear: false,
     };
     this.numbers = [...new Array(10).keys()];
     this.operations = ['-', '+', 'X', '+/-', '%', '÷', '='];
@@ -21,11 +22,31 @@ class App extends React.Component {
       total: null,
       next: null,
       operate: null,
-    })
+    });
+  }
+
+  clearDisplay() {
+    const { clear, next } = this.state;
+    if (clear) {
+      console.log('clearing')
+      this.setState({
+        next: null,
+        clear: false,
+      });
+      return null;
+    }
+
+    return next;
+  }
+
+  clearDisplayInTheNextInput() {
+    this.setState({
+      clear: true,
+    });
   }
 
   handleNumberInput(buttonName) {
-    const { next } = this.state;
+    const next = this.clearDisplay();
     const newNext = `${next}`.replace(/null/g, '').concat(buttonName);
     this.setState({
       next: newNext,
@@ -33,7 +54,15 @@ class App extends React.Component {
   }
 
   calculate({ total, next, operate }, buttonName) {
-    const result = calculate({ total, next, operate }, buttonName);
+    const result = calculate({ total, next, operate }, operate);
+    if (buttonName === '=') {
+      this.setState({
+        total: null,
+        next: result.toPrecision(),
+        operate: null,
+      });
+      return;
+    }
     this.setState({
       total: result.toPrecision(),
       next: result.toPrecision(),
@@ -41,15 +70,15 @@ class App extends React.Component {
   }
 
   handleOperationInput(buttonName) {
+    this.clearDisplayInTheNextInput();
     const { total, next, operate } = this.state;
     if (buttonName === '=' && total !== null && next !== null) {
-      this.calculate({ total, next, operate }, operate);
+      this.calculate({ total, next, operate }, buttonName);
       return;
     }
     if (total === null) {
       this.setState({
         total: next,
-        next: null,
         operate: buttonName,
       });
     } else {
@@ -67,7 +96,7 @@ class App extends React.Component {
     }
     setTimeout(() => {
       console.log(this.state);
-    }, 0);
+    }, 200);
   }
 
   render() {
