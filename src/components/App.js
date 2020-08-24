@@ -1,8 +1,8 @@
 import React from 'react';
 import Display from './Display';
 import ButtonPanel from './ButtonPanel';
-// eslint-disable-next-line no-unused-vars
 import calculate from '../logic/calculate';
+import handleButtons from './Keyboard';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,7 +15,8 @@ class App extends React.Component {
     };
     this.numbers = [...new Array(10).keys()];
     this.operations = ['-', '+', 'X', '+/-', '%', '÷', '='];
-    window.addEventListener('keydown', this.handleButtons.bind(this));
+    this.handleClick = this.handleClick.bind(this);
+    window.addEventListener('keydown', event => { handleButtons(event, this.handleClick); });
   }
 
   handleClearInput() {
@@ -86,6 +87,14 @@ class App extends React.Component {
   handleOperationInput(buttonName) {
     this.clearDisplayInTheNextInput();
     const { total, next, operate } = this.state;
+    if (operate === '÷' && next === '0' && total !== null) {
+      this.setState({
+        total: null,
+        next: 'error: division by 0',
+        operate: null,
+      });
+      return;
+    }
     if (buttonName === '+/-') {
       this.convertToOppositeSign({ total, next, operate }, buttonName);
       return;
@@ -120,30 +129,6 @@ class App extends React.Component {
     }
   }
 
-  handleButtons(event) {
-    let buttonName = event.key;
-    switch (buttonName) {
-      case 'Enter':
-        buttonName = '=';
-        break;
-      case '/':
-        buttonName = '÷';
-        break;
-      case '*':
-        buttonName = 'X';
-        break;
-      case ',':
-        buttonName = '.';
-        break;
-      case 'Backspace':
-        buttonName = 'AC';
-        break;
-      default:
-        break;
-    }
-    this.handleClick(buttonName);
-  }
-
   render() {
     let { next } = this.state;
     if (next === null) {
@@ -152,7 +137,7 @@ class App extends React.Component {
     return (
       <div id="app">
         <Display next={next} />
-        <ButtonPanel clickHandler={this.handleClick.bind(this)} />
+        <ButtonPanel clickHandler={this.handleClick} />
       </div>
     );
   }
