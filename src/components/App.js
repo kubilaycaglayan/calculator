@@ -53,6 +53,20 @@ class App extends React.Component {
     });
   }
 
+  convertToPercentage() {
+    const { next } = this.state;
+    this.setState({
+      next: (next / 100).toString(),
+    });
+  }
+
+  convertToOppositeSign({ total, next, operate }, buttonName) {
+    const result = calculate({ total, next, operate }, buttonName);
+    this.setState({
+      next: result.toPrecision(),
+    });
+  }
+
   calculate({ total, next, operate }, buttonName) {
     const result = calculate({ total, next, operate }, operate);
     if (buttonName === '=') {
@@ -72,8 +86,18 @@ class App extends React.Component {
   handleOperationInput(buttonName) {
     this.clearDisplayInTheNextInput();
     const { total, next, operate } = this.state;
-    if (buttonName === '=' && total !== null && next !== null) {
-      this.calculate({ total, next, operate }, buttonName);
+    if (buttonName === '+/-') {
+      this.convertToOppositeSign({ total, next, operate }, buttonName);
+      return;
+    }
+    if (buttonName === '%') {
+      this.convertToPercentage();
+      return;
+    }
+    if (buttonName === '=') {
+      if (total !== null && next !== null) {
+        this.calculate({ total, next, operate }, buttonName);
+      }
       return;
     }
     if (total === null) {

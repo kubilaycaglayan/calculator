@@ -23,7 +23,7 @@ const operate = (numberOne, numberTwo, operation) => {
       result = num1.mod(num2);
       break;
     case '+/-':
-      result = num1.times(negativeOne);
+      result = num2.times(negativeOne);
       break;
     default:
       break;
