@@ -54,17 +54,17 @@ class App extends React.Component {
     });
   }
 
-  convertToPercentage() {
-    const { next } = this.state;
+  convertToPercentage({ next, operate }, buttonName) {
     if (next === null) return;
+    const result = calculate({ total: 0, next, operate }, buttonName);
     this.setState({
-      next: (next / 100).toString(),
+      next: result.toPrecision(),
     });
   }
 
   convertToOppositeSign({ total, next, operate }, buttonName) {
-    const result = calculate({ total, next, operate }, buttonName);
     if (next === null) return;
+    const result = calculate({ total, next, operate }, buttonName);
     this.setState({
       next: result.toPrecision(),
     });
@@ -102,7 +102,7 @@ class App extends React.Component {
       return;
     }
     if (buttonName === '%') {
-      this.convertToPercentage();
+      this.convertToPercentage({ next, operate }, buttonName);
       return;
     }
     if (buttonName === '=') {

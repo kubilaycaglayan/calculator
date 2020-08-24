@@ -4,6 +4,7 @@ const operate = (numberOne, numberTwo, operation) => {
   const num1 = new Big(numberOne);
   const num2 = new Big(numberTwo);
   const negativeOne = new Big(-1);
+  const hundred = new Big(100);
   let result;
 
   switch (operation) {
@@ -20,7 +21,7 @@ const operate = (numberOne, numberTwo, operation) => {
       result = num1.div(num2);
       break;
     case '%':
-      result = num1.mod(num2);
+      result = num2.div(hundred);
       break;
     case '+/-':
       result = num2.times(negativeOne);
