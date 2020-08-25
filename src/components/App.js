@@ -81,6 +81,7 @@ class App extends React.Component {
       return;
     }
     this.setState({
+      operate: buttonName,
       total: result.toPrecision(),
       next: result.toPrecision(),
     });
