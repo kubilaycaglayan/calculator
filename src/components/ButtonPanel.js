@@ -35,7 +35,7 @@ export default function ButtonPanel(props) {
         <Button clickHandler={handleClick} name="+" />
       </div>
       <div>
-        <Button clickHandler={handleClick} color wide name="0" />
+        <Button clickHandler={handleClick} color wide name="0" className="zero" />
         <Button clickHandler={handleClick} color name="." />
         <Button clickHandler={handleClick} name="=" />
       </div>

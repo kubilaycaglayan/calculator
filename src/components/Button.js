@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function Button(props) {
-  const { color, wide, name } = props;
+  const { color, wide, name, className } = props;
   const style = {};
 
   function handleClick(buttonName, event) {
@@ -22,7 +22,7 @@ export default function Button(props) {
   }());
 
   return (
-    <button onClick={event => { handleClick(name, event); }} style={style} type="button">
+    <button className={className} onClick={event => { handleClick(name, event); }} style={style} type="button">
       { name }
     </button>
   );

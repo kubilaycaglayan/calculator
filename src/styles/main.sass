@@ -65,8 +65,6 @@ body
       @media ( max-width: 420px )
         height: 80px
       button
-        @media ( max-width: 520px )
-          padding-left: 2px
         background-color: #EFEFEF
         color: black
         width: 25%
@@ -76,6 +74,8 @@ body
         border-bottom-left-radius: 20px
         border-bottom-right-radius: 20px
         outline: none
+        @media ( max-width: 520px )
+          padding-left: 2px
         &:first-child
           border-left: none
           border-top-left-radius: 0
@@ -94,3 +94,13 @@ body
         button
           border-bottom-left-radius: 0
           border-bottom-right-radius: 0
+      button
+        @media ( max-width: 520px )
+          padding-left: 8px
+          border-radius: 50% !important
+      .zero
+        @media ( max-width: 520px )
+          border-top-left-radius: 60px !important
+          border-top-right-radius: 60px !important
+          border-bottom-left-radius: 60px !important
+          border-bottom-right-radius: 60px !important
