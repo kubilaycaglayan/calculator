@@ -3,6 +3,7 @@ import Display from './Display';
 import ButtonPanel from './ButtonPanel';
 import calculate from '../logic/calculate';
 import handleButtons from './Keyboard';
+import convert from '../helpers/convert';
 
 class App extends React.Component {
   constructor(props) {
@@ -41,7 +42,9 @@ class App extends React.Component {
   }
 
   clearDisplayInTheNextInput() {
+    const { next } = this.state;
     this.setState({
+      next,
       clear: true,
     });
   }
@@ -75,8 +78,8 @@ class App extends React.Component {
     if (buttonName === '=') {
       this.setState({
         total: null,
-        next: result.toPrecision(),
         operate: null,
+        next: result.toPrecision(),
       });
       return;
     }
@@ -88,18 +91,18 @@ class App extends React.Component {
   }
 
   handleOperationInput(buttonName) {
-    this.clearDisplayInTheNextInput();
     const { total, next, operate } = this.state;
+    if (buttonName === '+/-') {
+      this.convertToOppositeSign({ total, next, operate }, buttonName);
+      return;
+    }
+    this.clearDisplayInTheNextInput();
     if (operate === '÷' && next === '0' && total !== null) {
       this.setState({
         total: null,
         next: 'error: division by 0',
         operate: null,
       });
-      return;
-    }
-    if (buttonName === '+/-') {
-      this.convertToOppositeSign({ total, next, operate }, buttonName);
       return;
     }
     if (buttonName === '%') {
@@ -133,16 +136,7 @@ class App extends React.Component {
   }
 
   render() {
-    let { next, total, operate } = this.state;
-    if (next === null) {
-      next = '0';
-    }
-    if (total === null) {
-      total = '';
-    }
-    if (operate === null) {
-      operate = '';
-    }
+    const { total, next, operate } = convert(this.state);
     return (
       <div id="app">
         <Display next={next} total={total} operate={operate} />

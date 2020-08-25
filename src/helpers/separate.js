@@ -1,6 +1,12 @@
-const addSeperator = input => {
+const separate = text => {
   let lastPart;
   let wholePart;
+  let sign = '';
+  let input = text.slice();
+  if (input[0] === '-') {
+    sign = '-';
+    input = input.replace(/-/, '');
+  }
   const indexOfDotIfExists = input.indexOf('.');
   if (indexOfDotIfExists === -1) {
     lastPart = '';
@@ -16,7 +22,7 @@ const addSeperator = input => {
     return char;
   });
 
-  return seperated.reverse().join('') + lastPart;
+  return sign + seperated.reverse().join('') + lastPart;
 };
 
-export default addSeperator;
+export default separate;
