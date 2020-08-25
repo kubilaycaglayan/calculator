@@ -19,7 +19,6 @@ body
     flex-direction: column
     width: 700px
   .display
-    user-select: all
     font-size: 2em
     display: flex
     background-color: $gray
@@ -39,7 +38,10 @@ body
       .operate
         color: orange
       .total
+        user-select: all
         color: orange
+    .result
+      user-select: all
   .button-panel
     margin-top: 5px
     width: 100%
