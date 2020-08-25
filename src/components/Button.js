@@ -5,8 +5,8 @@ export default function Button(props) {
   const { color, wide, name } = props;
   const style = {};
 
-  function handleClick(buttonName) {
-    return props.clickHandler(buttonName);
+  function handleClick(buttonName, event) {
+    return props.clickHandler(buttonName, event);
   }
 
   (function isWide() {
@@ -22,7 +22,7 @@ export default function Button(props) {
   }());
 
   return (
-    <button onClick={() => { handleClick(name); }} style={style} type="button">
+    <button onClick={event => { handleClick(name, event); }} style={style} type="button">
       { name }
     </button>
   );

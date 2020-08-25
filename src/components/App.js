@@ -124,7 +124,10 @@ class App extends React.Component {
     }
   }
 
-  handleClick(buttonName) {
+  handleClick(buttonName, clickEvent = false) {
+    if (clickEvent) {
+      clickEvent.preventDefault();
+    }
     if (this.numbers.includes(parseInt(buttonName, 10)) || buttonName === '.') {
       this.handleNumberInput(buttonName);
     } else if (this.operations.includes(buttonName)) {

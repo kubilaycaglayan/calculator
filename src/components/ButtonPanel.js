@@ -4,8 +4,8 @@ import Button from './Button';
 
 export default function ButtonPanel(props) {
   const { clickHandler } = props;
-  function handleClick(buttonName) {
-    return clickHandler(buttonName);
+  function handleClick(buttonName, event) {
+    return clickHandler(buttonName, event);
   }
 
   return (
