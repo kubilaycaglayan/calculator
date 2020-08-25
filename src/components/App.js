@@ -132,13 +132,19 @@ class App extends React.Component {
   }
 
   render() {
-    let { next } = this.state;
+    let { next, total, operate } = this.state;
     if (next === null) {
       next = '0';
     }
+    if (total === null) {
+      total = '';
+    }
+    if (operate === null) {
+      operate = '';
+    }
     return (
       <div id="app">
-        <Display next={next} />
+        <Display next={next} total={total} operate={operate} />
         <ButtonPanel clickHandler={this.handleClick} />
       </div>
     );

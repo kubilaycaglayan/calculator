@@ -4,18 +4,16 @@ import PropTypes from 'prop-types';
 export default function Display(props) {
   const { total, next, operate } = props;
   return (
-    <div>
+    <div className="display">
       <div className="operation">
         <div className="total">
           { total }
-          72
         </div>
         <div className="operate">
           { operate }
-          +
         </div>
       </div>
-      <div className="display">
+      <div className="result">
         { next }
       </div>
     </div>
