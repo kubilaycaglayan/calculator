@@ -18,6 +18,14 @@ body
     display: flex
     flex-direction: column
     width: 700px
+    @media ( max-width: 720px )
+      width: 600px
+    @media ( max-width: 620px )
+      width: 500px
+    @media ( max-width: 520px )
+      width: 400px
+    @media ( max-width: 420px )
+      width: 300px
   .display
     font-size: 2em
     display: flex
@@ -51,6 +59,7 @@ body
       height: 100px
       width: 100%
       button
+        background-color: #EFEFEF
         color: black
         width: 25%
         height: 100%
