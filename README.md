@@ -3,12 +3,14 @@
 > This calculator has been built with react.
 > With this calculator app you can calculate your basic math operations.
 
-![screenshot will be added](./app_screenshot.png)
+![screenshot will be added](./images/calc.png)
 
 ## Built With
 
 - JavaScript
 - React
+- Create-react-app
+- Big.js
 
 ## Live Demo
 
@@ -33,7 +35,9 @@ To get a local copy up and running follow these simple example steps.
 
 ### Run tests
 
-- Currently, there is no automated tests for this application.
+- After "Setup" stage do the following:
+- `npm run test`
+- push the "a" button on your keyboard to run all the tests.
 
 ## Author
 
