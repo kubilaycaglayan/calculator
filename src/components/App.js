@@ -58,16 +58,14 @@ class App extends React.Component {
   }
 
   convertToPercentage({ next, operate }, buttonName) {
-    if (next === null) return;
     const result = calculate({ total: 0, next, operate }, buttonName);
     this.setState({
       next: result,
     });
   }
 
-  convertToOppositeSign({ total, next, operate }, buttonName) {
-    if (next === null) return;
-    const result = calculate({ total, next, operate }, buttonName);
+  convertToOppositeSign({ next, operate }, buttonName) {
+    const result = calculate({ total: 0, next, operate }, buttonName);
     this.setState({
       next: result,
     });
@@ -92,8 +90,8 @@ class App extends React.Component {
 
   handleOperationInput(buttonName) {
     const { total, next, operate } = this.state;
-    if (buttonName === '+/-') {
-      this.convertToOppositeSign({ total, next, operate }, buttonName);
+    if (buttonName === '+/-' && next !== null) {
+      this.convertToOppositeSign({ next, operate }, buttonName);
       return;
     }
     this.clearDisplayInTheNextInput();
@@ -105,7 +103,7 @@ class App extends React.Component {
       });
       return;
     }
-    if (buttonName === '%') {
+    if (buttonName === '%' && next !== null) {
       this.convertToPercentage({ next, operate }, buttonName);
       return;
     }
