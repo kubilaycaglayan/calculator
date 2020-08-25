@@ -90,7 +90,7 @@ class App extends React.Component {
 
   handleOperationInput(buttonName) {
     const { total, next, operate } = this.state;
-    if (next.slice(0, 5) === 'error') return;
+    if (next !== null && next.slice(0, 5) === 'error') return;
     if (buttonName === '+/-' && next !== null) {
       this.convertToOppositeSign({ next, operate }, buttonName);
       return;
@@ -114,12 +114,12 @@ class App extends React.Component {
       }
       return;
     }
-    if (total === null) {
+    if (total === null && next !== null) {
       this.setState({
         total: next,
         operate: buttonName,
       });
-    } else {
+    } else if (next !== null) {
       this.calculate({ total, next, operate }, buttonName);
     }
   }
