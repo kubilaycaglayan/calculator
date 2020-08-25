@@ -19,6 +19,22 @@ describe('operate', () => {
   });
 
   describe('throws division by zero error', () => {
-    expect(operate(15, 0, '÷')).toThrow(Error);
+    expect(() => {
+      operate(15, 0, '÷');
+    }).toThrow(Error);
+  });
+
+  describe('reverses the sign', () => {
+    expect(operate(0, 15, '+/-')).toBe('-15');
+    expect(operate(0, -15, '+/-')).toBe('15');
+  });
+
+  describe('reverses the sign of \'next\'', () => {
+    expect(operate(0, 15, '+/-')).toBe('-15');
+    expect(operate(0, -15, '+/-')).toBe('15');
+  });
+
+  describe('divides \'next\' to a hundred', () => {
+    expect(operate(0, 150, '%')).toBe('1.5');
   });
 });
