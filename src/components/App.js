@@ -50,8 +50,10 @@ class App extends React.Component {
   }
 
   handleNumberInput(buttonName) {
-    const next = this.clearDisplay();
-    const newNext = `${next}`.replace(/null/g, '').concat(buttonName);
+    let next = this.clearDisplay();
+    next = `${next}`.replace(/null/g, '').concat(buttonName);
+    if (next.length > 12) return;
+    const newNext = next;
     this.setState({
       next: newNext,
     });
