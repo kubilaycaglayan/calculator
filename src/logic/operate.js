@@ -30,7 +30,7 @@ const operate = (numberOne, numberTwo, operation) => {
       break;
   }
 
-  return result;
+  return result.toPrecision();
 };
 
 export { operate as default };

@@ -61,7 +61,7 @@ class App extends React.Component {
     if (next === null) return;
     const result = calculate({ total: 0, next, operate }, buttonName);
     this.setState({
-      next: result.toPrecision(),
+      next: result,
     });
   }
 
@@ -69,7 +69,7 @@ class App extends React.Component {
     if (next === null) return;
     const result = calculate({ total, next, operate }, buttonName);
     this.setState({
-      next: result.toPrecision(),
+      next: result,
     });
   }
 
@@ -79,14 +79,14 @@ class App extends React.Component {
       this.setState({
         total: null,
         operate: null,
-        next: result.toPrecision(),
+        next: result,
       });
       return;
     }
     this.setState({
       operate: buttonName,
-      total: result.toPrecision(),
-      next: result.toPrecision(),
+      total: result,
+      next: result,
     });
   }
 

@@ -5,7 +5,6 @@ const convert = stateObject => {
   if (next === null) {
     next = '0';
   } else if (!(next.slice(0, 5) === 'error')) {
-    console.log(next.slice(0,5))
     next = separate(next);
   }
   if (total === null) {
