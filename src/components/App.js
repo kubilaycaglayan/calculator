@@ -2,7 +2,7 @@ import React from 'react';
 import Display from './Display';
 import ButtonPanel from './ButtonPanel';
 import calculate from '../logic/calculate';
-import handleButtons from './Keyboard';
+import handleButtons from '../events/keyboard';
 import convert from '../helpers/convert';
 
 class App extends React.Component {
