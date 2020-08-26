@@ -1,4 +1,4 @@
-import separate from './separate';
+import { separate } from 'kubilay';
 
 const convert = stateObject => {
   let { next, total, operate } = stateObject;
