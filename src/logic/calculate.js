@@ -120,7 +120,6 @@ const calculate = (
     }
   };
 
-  // const handleClick = (buttonName, state, clickEvent) => {
   if (clickEvent) {
     clickEvent.preventDefault();
   }
@@ -133,7 +132,6 @@ const calculate = (
   }
 
   return state;
-  // };
 };
 
 export default calculate;
