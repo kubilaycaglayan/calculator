@@ -14,129 +14,15 @@ class App extends React.Component {
       operate: null,
       clear: false,
     };
-    this.numbers = [...new Array(10).keys()];
-    this.operations = ['-', '+', 'X', '+/-', '%', '÷', '='];
+
     this.handleClick = this.handleClick.bind(this);
     window.addEventListener('keydown', event => { handleButtons(event, this.handleClick); });
   }
 
-  handleClearInput() {
-    this.setState({
-      total: null,
-      next: null,
-      operate: null,
-    });
-  }
-
-  clearDisplay() {
-    const { clear, next } = this.state;
-    if (clear) {
-      this.setState({
-        next: null,
-        clear: false,
-      });
-      return null;
-    }
-
-    return next;
-  }
-
-  clearDisplayInTheNextInput() {
-    const { next } = this.state;
-    this.setState({
-      next,
-      clear: true,
-    });
-  }
-
-  handleNumberInput(buttonName) {
-    let next = this.clearDisplay();
-    next = `${next}`.replace(/null/g, '').concat(buttonName);
-    if (next.length > 12) return;
-    const newNext = next;
-    this.setState({
-      next: newNext,
-    });
-  }
-
-  convertToPercentage({ next, operate }, buttonName) {
-    const result = calculate({ total: 0, next, operate }, buttonName);
-    this.setState({
-      next: result,
-    });
-  }
-
-  convertToOppositeSign({ next, operate }, buttonName) {
-    const result = calculate({ total: 0, next, operate }, buttonName);
-    this.setState({
-      next: result,
-    });
-  }
-
-  calculate({ total, next, operate }, buttonName) {
-    const result = calculate({ total, next, operate }, operate);
-    if (buttonName === '=') {
-      this.setState({
-        total: null,
-        operate: null,
-        next: result,
-      });
-      return;
-    }
-    this.setState({
-      operate: buttonName,
-      total: result,
-      next: result,
-    });
-  }
-
-  handleOperationInput(buttonName) {
-    const { total, next, operate } = this.state;
-    if (next !== null && next.slice(0, 5) === 'error') return;
-    if (buttonName === '+/-' && next !== null) {
-      this.convertToOppositeSign({ next, operate }, buttonName);
-      return;
-    }
-    this.clearDisplayInTheNextInput();
-    if (operate === '÷' && next === '0' && total !== null) {
-      this.setState({
-        total: null,
-        next: 'error: division by 0',
-        operate: null,
-      });
-      return;
-    }
-    if (buttonName === '%' && next !== null) {
-      this.convertToPercentage({ next, operate }, buttonName);
-      return;
-    }
-    if (buttonName === '=') {
-      if (total !== null && next !== null) {
-        this.calculate({ total, next, operate }, buttonName);
-      }
-      return;
-    }
-    if (total === null && next !== null) {
-      this.setState({
-        total: next,
-        operate: buttonName,
-      });
-    } else if (next !== null) {
-      this.calculate({ total, next, operate }, buttonName);
-    }
-  }
-
   handleClick(buttonName, clickEvent = false) {
-    if (clickEvent) {
-      clickEvent.preventDefault();
-    }
-    if (this.numbers.includes(parseInt(buttonName, 10)) || buttonName === '.') {
-      this.handleNumberInput(buttonName);
-    } else if (this.operations.includes(buttonName)) {
-      this.handleOperationInput(buttonName);
-    } else if (buttonName === 'AC') {
-      this.handleClearInput();
-    }
+    const data = this.state;
+    const newState = calculate(data, buttonName, clickEvent);
+    this.setState(newState);
   }
 
   render() {
