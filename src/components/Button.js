@@ -12,7 +12,7 @@ export default function Button(props) {
   }
 
   style.width = wide ? '50%' : '';
-  style.backgroundColor = (color === 'orange' ? 'orange' : '');
+  style.backgroundColor = (color ? '' : 'orange');
 
   return (
     <button className={className} onClick={event => { handleClick(name, event); }} style={style} type="button">
@@ -31,6 +31,6 @@ Button.propTypes = {
 
 Button.defaultProps = {
   wide: false,
-  color: 'orange',
+  color: false,
   className: '',
 };
