@@ -8,7 +8,7 @@ const calculate = (
   },
   buttonName,
 ) => {
-  let {
+  const {
     total,
     next,
   } = data;
