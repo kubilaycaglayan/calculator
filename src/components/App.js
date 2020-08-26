@@ -4,6 +4,7 @@ import ButtonPanel from './ButtonPanel';
 import calculate from '../logic/calculate';
 import handleButtons from '../events/keyboard';
 import convert from '../helpers/convert';
+import Signature from './Signature';
 
 class App extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class App extends React.Component {
       <div id="app">
         <Display next={next} total={total} operate={operate} />
         <ButtonPanel clickHandler={this.handleClick} />
+        <Signature />
       </div>
     );
   }
