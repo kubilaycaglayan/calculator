@@ -13,7 +13,7 @@
 ## Features
 
 - Keyboard control.
-- Automatic thousand seperators.
+- Automatic thousand separators.
 - Chain calculations.
 - Visible last result.
 
